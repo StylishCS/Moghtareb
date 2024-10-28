@@ -1,0 +1,55 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Ad>
+
+<section class="mt-5 pt-5">
+    <div class="container card border border-1 border-light pb-3 pt-5">
+
+        <!-- Search and Filter Form -->
+        <form method="get" action="@Url.Action("Index", "Ad")" class="mb-4">
+            <div class="row justify-content-center">
+                <div class="col-md-3 m-2">
+                    <input type="text" name="title" value="@ViewBag.Title" class="form-control" placeholder="Search by Title" />
+                </div>
+                <div class="col-md-3 m-2">
+                    <input type="number" name="minPrice" value="@ViewBag.MinPrice" class="form-control" placeholder="Min Price" />
+                </div>
+                <div class="col-md-3 m-2">
+                    <input type="number" name="maxPrice" value="@ViewBag.MaxPrice" class="form-control" placeholder="Max Price" />
+                </div>
+                <div class="col-md-3 m-2">
+                    <input type="text" name="city" value="@ViewBag.City" class="form-control" placeholder="City" />
+                </div>
+                <div class="col-md-3 m-2">
+                    <input type="number" name="bedrooms" value="@ViewBag.Bedrooms" class="form-control" placeholder="Bedrooms" />
+                </div>
+                <br />
+                <div class="col-md-3 m-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Ad Listings -->
+        @foreach (Ad ad in Model)
+        {
+            <partial name="_CardTilePartial" model="ad"></partial>
+        }
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center pt-4">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, title = ViewBag.Title, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, city = ViewBag.City, bedrooms = ViewBag.Bedrooms }),
+                     new PagedListRenderOptions
+            {
+                DisplayLinkToIndividualPages = true,
+                DisplayPageCountAndCurrentLocation = false,
+                MaximumPageNumbersToDisplay = 5,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link" },
+            }
+                     )
+        </div>
+    </div>
+</section>

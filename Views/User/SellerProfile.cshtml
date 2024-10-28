@@ -1,0 +1,143 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model User
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <!-- User Info -->
+        <div class="col-md-12 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <img src="@Model.image" alt="Profile Picture" class="rounded-circle" width="80" height="80">
+                </div>
+                <div>
+                    @if (Model.isFeatured)
+                    {
+                        <h4 class="font-weight-bold">@Model.name<i class="fas fa-certificate text-secondary ms-2"></i></h4>
+                    }
+                    else
+                    {
+                        <h4 class="font-weight-bold">@Model.name</h4>
+                    }
+                    <p>@Model.Ads.Count() published ads</p>
+                </div>
+            </div>
+            <div>
+                <button onclick="copyToClipBoard()" class="btn btn-outline-secondary" id="clip-btn"><i class="fa fa-share me-2"></i>Share agency profile</button>
+                @if (User.Claims.FirstOrDefault(u => u.Type == "id") != null && Model.id == int.Parse(User.Claims.FirstOrDefault(u => u.Type == "id").Value))
+                {
+                    @if (!Model.isSecured)
+                    {
+                        <a asp-action="TwoFactorAuth" asp-controller="Authentication" class="btn btn-outline-primary mx-2" id="clip-btn"><i class="fa fa-lock me-2"></i>Enable 2FA</a>
+                    }
+                    <a asp-action="Profile" asp-controller="User" class="btn btn-outline-success" id="clip-btn"><i class="fa fa-pen me-2"></i>Edit Profile</a>
+                }
+            </div>
+        </div>
+    </div>
+    <hr />
+    <!-- Filter Section -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="d-flex align-items-center justify-content-between">
+                @if (User.Claims.FirstOrDefault(u => u.Type == "id") != null && Model.id == int.Parse(User.Claims.FirstOrDefault(u => u.Type == "id").Value))
+                {
+                    <h4>My Ads</h4>
+                }
+                else
+                {
+                    <h4>User Ads</h4>
+                }
+                <h5>Showing @ViewBag.ads.Count out of @ViewBag.ads.TotalItemCount Ads</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        @foreach (Ad ad in ViewBag.ads)
+        {
+            <div class="col-md-4 mb-4 d-flex justify-content-center">
+                <partial name="_CardPartial" model="ad"></partial>
+            </div>
+        }
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center pt-4">
+        @Html.PagedListPager((IPagedList)ViewBag.ads, page => Url.Action("SellerProfile", new { page }),
+                 new PagedListRenderOptions
+        {
+            DisplayLinkToIndividualPages = true,
+            DisplayPageCountAndCurrentLocation = false,
+            MaximumPageNumbersToDisplay = 5,
+            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" },
+        }
+        )
+    </div>
+</div>
+@if (User.Claims.FirstOrDefault(u => u.Type == "id") != null && Model.id == int.Parse(User.Claims.FirstOrDefault(u => u.Type == "id").Value))
+{
+    <hr />
+    <div class="container mt-5">
+        <!-- Filter Section -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4>Wishlist</h4>
+                    <h5>Showing @ViewBag.wishlist.Count out of @ViewBag.wishlist.TotalItemCount Ads</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            @foreach (AdUserWishlist ad in ViewBag.wishlist)
+            {
+                <div class="col-md-4 mb-4 d-flex justify-content-center">
+                    <partial name="_CardPartial" model="ad.ad"></partial>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center pt-4">
+            @Html.PagedListPager((IPagedList)ViewBag.wishlist, pageWishlist => Url.Action("SellerProfile", new { pageWishlist }),
+                     new PagedListRenderOptions
+            {
+                DisplayLinkToIndividualPages = true,
+                DisplayPageCountAndCurrentLocation = false,
+                MaximumPageNumbersToDisplay = 5,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link" },
+            }
+                     )
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script>
+        function copyToClipBoard() {
+            var tempInput = document.createElement("input");
+            tempInput.value = "https://localhost:7181/User/SellerProfile/@Model.id";
+
+            document.body.appendChild(tempInput);
+
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
+
+            navigator.clipboard.writeText(tempInput.value).then(function () {
+                var btn = document.getElementById("clip-btn");
+                btn.innerText = "Copied to clipboard";
+                btn.disabled = true;
+            }, function () {
+                alert("Failed to copy to clipboard");
+            });
+
+            document.body.removeChild(tempInput);
+        }
+    </script>
+}

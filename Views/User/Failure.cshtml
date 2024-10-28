@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "_ThemelessLayout";
+}
+
+<div class="success-container mt-5">
+    <i class="far fa-times-circle failure-icon"></i>
+    <h1 class="display-4">Oops!</h1>
+    <h2 class="text-danger">Something Went Wrong!</h2>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-primary btn-lg mt-4">Proceed to Home Page</a>
+</div>
+
+<style>
+    .success-container {
+        text-align: center;
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .failure-icon {
+        font-size: 60px;
+        color: #dc3545;
+    }
+
+</style>

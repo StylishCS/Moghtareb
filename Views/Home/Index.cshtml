@@ -1,0 +1,225 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Ad>
+
+<header>
+    <div class="container pt-4 pt-xl-5">
+        <div class="row pt-5">
+            <div class="col-md-8 text-center text-md-start mx-auto">
+                <div class="text-center">
+                    <h1 class="display-4 fw-bold mb-5">Find Your Dream Home With&nbsp;<span class="underline">Moghtareb</span>.</h1>
+                    <p class="fs-5 text-muted">Explore a wide range of properties tailored to your needs. Your dream home is just a search away.</p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-10 mx-auto">
+                <div class="text-center position-relative"><img class="img-fluid" src="/images/assets/img/illustrations/meeting.svg" style="width: 800px;"></div>
+            </div>
+        </div>
+    </div>
+</header>
+<!------------------------------------->
+<section class="py-4 py-xl-5">
+    <div class="container">
+        <div class="bg-primary border rounded border-0 border-primary overflow-hidden">
+            <div class="row g-0">
+                <div class="col-md-6 d-flex flex-column justify-content-center">
+                    <div class="text-white p-4 p-md-5">
+                        <h2 class="fw-bold mb-3">Join Moghtareb and Find Your Dream Home Today</h2>
+                        <p class="mb-4">Discover homes tailored to your preferences, connect with trusted agents, and make your move with confidence. Sign up now to get started!</p>
+                        <div class="my-3">
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-secondary me-2 mt-2" role="button" asp-action="Register" asp-controller="Authentication">Sign up</a>
+                            }
+                            <a class="btn btn-light mt-2" role="button" asp-action="Integrations" asp-controller="Home">About us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 order-first order-md-last" style="min-height: 250px;">
+                    <img class="w-100 h-100 fit-contain pt-5 pt-md-0" src="/images/assets/img/illustrations/web-development.svg" alt="Real Estate Illustration">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container py-4 py-xl-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="display-6 fw-bold pb-md-4">Unlock Premium Features for Maximum Exposure</h3>
+            </div>
+            <div class="col-md-6 pt-4">
+                <p class="text-muted mb-4">Upgrade to a Premium account to stand out, boost your ad visibility, and track detailed engagement metrics. Get more views and make your listings more attractive.</p>
+            </div>
+        </div>
+        <div class="row gy-4 gy-md-0">
+            <div class="col-md-6 d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                <div>
+                    <div class="row gy-2 row-cols-1 row-cols-sm-2">
+                        <div class="col text-center text-md-start">
+                            <div class="d-flex justify-content-center align-items-center justify-content-md-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-sun fs-3 text-primary bg-secondary">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+                                </svg>
+                                <h5 class="fw-bold mb-0 ms-2">Boost Your Ad</h5>
+                            </div>
+                            <p class="text-muted my-3">Increase your ad’s visibility by appearing at the top of search results.</p>
+                        </div>
+                        <div class="col text-center text-md-start">
+                            <div class="d-flex justify-content-center align-items-center justify-content-md-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-sun fs-3 text-primary bg-secondary">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+                                </svg>
+                                <h5 class="fw-bold mb-0 ms-2">Featured Account</h5>
+                            </div>
+                            <p class="text-muted my-3">Stand out with a "Featured" tag on your profile, signaling trust and value.</p>
+                        </div>
+                        <div class="col text-center text-md-start">
+                            <div class="d-flex justify-content-center align-items-center justify-content-md-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-sun fs-3 text-primary bg-secondary">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+                                </svg>
+                                <h5 class="fw-bold mb-0 ms-2">View Count</h5>
+                            </div>
+                            <p class="text-muted my-3">Know exactly how many people have viewed your ad in real time.</p>
+                        </div>
+                        <div class="col text-center text-md-start">
+                            <div class="d-flex justify-content-center align-items-center justify-content-md-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-sun fs-3 text-primary bg-secondary">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+                                </svg>
+                                <h5 class="fw-bold mb-0 ms-2">Contact Clicks</h5>
+                            </div>
+                            <p class="text-muted my-3">Track how many potential buyers have clicked to view your contact information.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 order-first order-md-last">
+                <div><img class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="/images/assets/img/illustrations/teamwork.svg" alt="Premium Features Illustration"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!------------------------------------->
+
+<section>
+    <div class="container py-4 py-xl-5 mb-5">
+        <div class="row gy-4 gy-md-0">
+            <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                <div><img class="rounded img-fluid fit-cover" style="min-height: 300px;" src="/images/assets/img/illustrations/presentation.svg" width="800" alt="Website Statistics Illustration"></div>
+            </div>
+            <div class="col">
+                <div style="max-width: 450px;">
+                    <h3 class="fw-bold pb-md-4">Your Success Starts Here Moghtareb's Impact in Numbers</h3>
+                    <p class="text-muted py-4 py-md-0">Discover why thousands trust us to help them find their dream homes. Our platform continues to grow, making it easier for you to connect, buy, and sell.</p>
+                    <div class="row gy-4 row-cols-2 row-cols-md-2">
+                        <div class="col">
+                            <div>
+                                <span class="fs-2 fw-bold text-primary bg-secondary">50k+</span>
+                                <p class="fw-normal text-muted">Active users</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div>
+                                <span class="fs-2 fw-bold text-primary bg-secondary">20k+</span>
+                                <p class="fw-normal text-muted">Properties listed</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div>
+                                <span class="fs-2 fw-bold text-primary bg-secondary">10k+</span>
+                                <p class="fw-normal text-muted">Successful transactions</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div>
+                                <span class="fs-2 fw-bold text-primary bg-secondary">95%</span>
+                                <p class="fw-normal text-muted">User satisfaction rate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!---------------------------->
+
+<!------------------------------------->
+<h1 class="text-center mb-3">Latest Properties</h1>
+<section>
+    <div class="container card border border-1 border-light pb-4">
+        <div class="row">
+            @foreach (Ad ad in Model)
+            {
+                <div class="col-md-4 mb-4 d-flex justify-content-center">
+                    <partial name="_CardPartial" model="ad"></partial>
+                </div>
+            }
+        </div>
+        <a class="btn btn-primary mx-auto" asp-action="Index" asp-controller="Ad">View More</a>
+    </div>
+</section>
+
+
+<section class="py-4 py-xl-5 mb-5">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="display-6 fw-bold mb-5"><span class="pb-3 underline">Frequently Asked Questions (FAQ)<br></span></h2>
+                <p class="text-muted mb-5">Got questions? We’ve got answers! Below are some common inquiries about using our platform and how you can maximize your experience with Moghtareb.</p>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-8 mx-auto">
+                <div class="accordion text-muted" role="tablist" id="accordion-1">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" role="tab"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="true" aria-controls="accordion-1 .item-1">How does a Premium account boost my ad visibility?</button></h2>
+                        <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
+                            <div class="accordion-body">
+                                <p>With a Premium account, your ad gets prioritized in search results, making it more visible to potential buyers. Premium ads are also highlighted with a 'Featured' badge, increasing the chances of attracting attention and receiving inquiries.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-2" aria-expanded="false" aria-controls="accordion-1 .item-2">How can I track the views and clicks on my ads?</button></h2>
+                        <div class="accordion-collapse collapse item-2" role="tabpanel" data-bs-parent="#accordion-1">
+                            <div class="accordion-body">
+                                <p>As a Premium user, you have access to detailed statistics for your ads, including how many users have viewed your ad and how many clicked to view your contact information. This insight helps you gauge the performance of your listings.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-3" aria-expanded="false" aria-controls="accordion-1 .item-3">What is a 'Featured' account, and how does it work?</button></h2>
+                        <div class="accordion-collapse collapse item-3" role="tabpanel" data-bs-parent="#accordion-1">
+                            <div class="accordion-body">
+                                <p>Upgrading to a 'Featured' account increases your credibility and visibility. Your profile will be marked as 'Featured', allowing potential buyers to trust your listings more readily, and boosting your overall presence on the platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-4" aria-expanded="false" aria-controls="accordion-1 .item-4">Is there a limit to the number of ads I can post?</button></h2>
+                        <div class="accordion-collapse collapse item-4" role="tabpanel" data-bs-parent="#accordion-1">
+                            <div class="accordion-body">
+                                <p>There is no limit to the number of ads you can post. However, Premium accounts enjoy additional perks like better ad placement, statistics, and more exposure compared to standard accounts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

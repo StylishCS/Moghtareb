@@ -1,0 +1,85 @@
+﻿@model UserOtpViewModel
+@{
+    Layout = "_ThemelessLayout";
+}
+
+<h1 class="d-flex justify-content-center mt-5 py-5">Check Your Email!</h1>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <img class="img-fluid w-100" src="~/images/assets/img/illustrations/login.svg">
+            </div>
+            <div class="col-md-5 col-xl-4 text-center text-md-start">
+                <h2 class="display-6 fw-bold mb-5">
+                    <span class="underline pb-1"><strong><i class="fa fa-lock me-3"></i>Two Factor Authentication</strong><br></span>
+                </h2>
+                <form method="post">
+                    <div class="input-group mb-3">
+                        <input class="form-control" placeholder="Verification Code" asp-for="otp" value="">
+                        <div class="input-group-append">
+                            <button id="resendBtn" class="btn btn-secondary" type="button" onclick="ResendOTP()" disabled>
+                                59
+                            </button>
+                        </div>
+                    </div>
+                    <input asp-for="id" hidden />
+                    <span class="text-danger" asp-validation-for="otp"></span>
+                    @* <div asp-validation-summary="All" class="text-danger"></div> *@
+                    <button class="btn btn-primary shadow mt-3 w-100" type="submit">
+                        Confirm
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        let countdown;
+        let timeLeft = 59;
+
+        // Start the countdown as soon as the page loads
+        window.onload = function () {
+            startCountdown();
+        }
+
+        function startCountdown() {
+            const resendBtn = document.getElementById("resendBtn");
+
+            countdown = setInterval(function () {
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    resendBtn.disabled = false;
+                    resendBtn.innerHTML = "Resend";
+                } else {
+                    resendBtn.innerHTML = `${timeLeft}`;
+                    timeLeft--;
+                }
+            }, 1000);
+        }
+
+        function ResendOTP() {
+            const resendBtn = document.getElementById("resendBtn");
+            resendBtn.disabled = true;
+            resendBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
+
+            $.ajax({
+                url: '@Url.Action("ResendOTP", "Authentication")',
+                type: 'POST',
+                data: { id: @Model.id },
+                success: function (response) {
+                    alert("OTP Sent");
+                    timeLeft = 59;  // Reset countdown
+                    startCountdown();  // Restart countdown
+                },
+                error: function (xhr, status, error) {
+                    alert("Error");
+                    resendBtn.disabled = false;
+                    resendBtn.innerHTML = "Resend";  // Reset button to "Resend"
+                }
+            });
+        }
+    </script>
+}

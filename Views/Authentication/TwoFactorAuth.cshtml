@@ -1,0 +1,56 @@
+﻿@model User
+@{
+    Layout = "_ThemelessLayout";
+}
+
+<h1 class="d-flex justify-content-center mt-5 py-5">Start Securing Your Account Now!</h1>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <img class="img-fluid w-100" src="~/images/assets/img/illustrations/login.svg">
+            </div>
+            <div class="col-md-5 col-xl-4 text-center text-md-start">
+                <h2 class="display-6 fw-bold mb-5">
+                    <span class="underline pb-1"><strong><i class="fa fa-lock me-3"></i>Two Factor Authentication</strong><br></span>
+                </h2>
+                <input required id="emailInp" type="text" class="form-control" asp-for="email" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div>
+                    <button id="confirmBtn" onclick="request2fa()" class="btn btn-primary shadow mt-3 w-100" type="button">
+                        Confirm
+                    </button>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        function request2fa() {
+            var emailInp = document.getElementById("emailInp");
+            var email = emailInp.value;
+            var confirmBtn = document.getElementById("confirmBtn");
+
+            confirmBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
+            confirmBtn.disabled = true;
+
+            $.ajax({
+                url: '@Url.Action("SendMail", "Authentication")',
+                type: 'POST',
+                data: { email: email },
+                success: function (response) {
+                    confirmBtn.innerHTML = 'Check Your Email!';
+                    confirmBtn.disabled = true;
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr);
+                    confirmBtn.innerHTML = 'Confirm';
+                    confirmBtn.disabled = false;
+                    alert("Error: " + error);
+                }
+            });
+        }
+    </script>
+}

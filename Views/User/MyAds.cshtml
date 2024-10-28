@@ -1,0 +1,38 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Ad>
+
+@Html.PagedListPager(Model, page => Url.Action("MyAds", new { page }), new PagedListRenderOptions
+{
+    DisplayLinkToIndividualPages = true,
+    DisplayPageCountAndCurrentLocation = false,
+    MaximumPageNumbersToDisplay = 10,
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" },
+
+})
+
+
+<section class="pt-5">
+    <div class="container card border border-1 border-light pb-3 no-hover">
+        @foreach (Ad ad in Model)
+        {
+            <partial name="_CardPartial" model="ad"></partial>
+        }
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center pt-4">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("MyAds", new { page }),
+                     new PagedListRenderOptions
+            {
+                DisplayLinkToIndividualPages = true,
+                DisplayPageCountAndCurrentLocation = false,
+                MaximumPageNumbersToDisplay = 5,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link" },
+            }
+                     )
+        </div>
+    </div>
+</section>

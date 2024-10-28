@@ -1,0 +1,190 @@
+﻿@model Ad
+
+@{
+    Layout = "_ThemelessLayout";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All"></div>
+    @* <div class="card border border-1 p-4 my-2">
+        <div id="image-upload-container">
+            <div class="mb-3">
+                <label for="ImageUrls">Upload Images</label>
+                <input type="file" class="form-control" name="ImageUrls" accept="image/*" multiple />
+            </div>
+        </div>
+    </div> *@
+    <div class="card border border-1 p-4 my-2">
+        <div class="mb-3">
+            <label asp-for="area">Area</label>
+            <input class="form-control" asp-for="area" />
+            <span class="text-danger" asp-validation-for="area"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="bedrooms">Bedrooms</label>
+            <input class="form-control" asp-for="bedrooms" />
+            <span class="text-danger" asp-validation-for="bedrooms"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="bathrooms">Bathrooms</label>
+            <input class="form-control" asp-for="bathrooms" />
+            <span class="text-danger" asp-validation-for="bathrooms"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="level">Level</label>
+            <input class="form-control" asp-for="level" />
+            <span class="text-danger" asp-validation-for="level"></span>
+        </div>
+        <div class="mb-3">
+            <label for="amenities">Amenities</label>
+            <div class="btn-group-toggle text-primary" data-toggle="buttons">
+                <label class="btn btn-outline-secondary m-1 text-primary">
+                    <input type="checkbox" class="amenity-checkbox text-primary" value="Balcony" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Balcony") != null ? "checked":"") /> Balcony
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Built in Kitchen Appliances" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Built in Kitchen Appliances") != null ? "checked" : "") /> Built in Kitchen Appliances
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Private Garden" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Private Garden") != null ? "checked" : "") /> Private Garden
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Central A/C & heating" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Central A/C & heating") != null ? "checked" : "") /> Central A/C & heating
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Security" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Security") != null ? "checked" : "") /> Security
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Covered Parking" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Covered Parking") != null ? "checked" : "") /> Covered Parking
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Maids Room" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Maids Room") != null ? "checked" : "") /> Maids Room
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Pets Allowed" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Pets Allowed") != null ? "checked" : "") /> Pets Allowed
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Pool" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Pool") != null ? "checked" : "") /> Pool
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Electricity Meter" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Electricity Meter") != null ? "checked" : "") /> Electricity Meter
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Water Meter" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Water Meter") != null ? "checked" : "") /> Water Meter
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Natural Gas" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Natural Gas") != null ? "checked" : "") /> Natural Gas
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Landline" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Landline") != null ? "checked" : "") /> Landline
+                </label>
+                <label class="btn btn-outline-secondary m-1">
+                    <input type="checkbox" class="amenity-checkbox" value="Elevator" @(@Model.amenities.Split(", ").FirstOrDefault(a => a == "Elevator") != null ? "checked" : "") /> Elevator
+                </label>
+            </div>
+            <input type="hidden" id="amenitiesInput" name="amenities" />
+        </div>
+    </div>
+    <div class="card border border-1 p-4 my-2">
+        <div class="mb-3">
+            <label asp-for="title">Title</label>
+            <input class="form-control" asp-for="title" />
+            <span class="text-danger" asp-validation-for="title"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="description">Description</label>
+            <textarea class="form-control" asp-for="description"></textarea>
+            <span class="text-danger" asp-validation-for="description"></span>
+        </div>
+        <hr />
+        <div class="mb-3">
+            <label asp-for="governorate">Governorate</label>
+            <input class="form-control" asp-for="governorate" />
+            <span class="text-danger" asp-validation-for="governorate"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="city">City</label>
+            <input class="form-control" asp-for="city" />
+            <span class="text-danger" asp-validation-for="city"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="address">Address</label>
+            <input class="form-control" asp-for="address" />
+            <span class="text-danger" asp-validation-for="address"></span>
+        </div>
+    </div>
+    <div class="card border border-1 p-4 my-2">
+        <div class="mb-3">
+            <label asp-for="price">Rental Fee</label>
+            <input class="form-control" asp-for="price" />
+            <span class="text-danger" asp-validation-for="price"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="rentalFrequency">Rental Frequency</label>
+            <select class="form-select" asp-for="rentalFrequency">
+                <option selected value="0">--Select Rental Frequecnty--</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly (Recommended)</option>
+                <option value="yearly">Yearly</option>
+            </select>
+            <span class="text-danger" asp-validation-for="rentalFrequency"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="deposit">Deposite</label>
+            <input class="form-control" asp-for="deposit" />
+            <span class="text-danger" asp-validation-for="deposit"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="insurance">Insurance</label>
+            <input class="form-control" asp-for="insurance" />
+            <span class="text-danger" asp-validation-for="insurance"></span>
+        </div>
+    </div>
+    <div class="card border border-1 p-4 my-2">
+        <div class="mb-3">
+            <label for="name">Name</label>
+            <input class="form-control" name="name" value="@User.Claims.FirstOrDefault(u => u.Type == "name")!.Value" readonly />
+        </div>
+        <div class="mb-3">
+            <label for="phone">Mobile Phone Number</label>
+            @if (@User.Claims.FirstOrDefault(u => u.Type == "phone") != null)
+            {
+                <input class="form-control" name="phone" value="@User.Claims.FirstOrDefault(u => u.Type == "phone").Value" />
+            }
+            else
+            {
+                <input class="form-control" name="phone" value="" />
+            }
+        </div>
+        <div class="mb-3">
+            <label for="whatsapp">Whatsapp Number</label>
+            @if (@User.Claims.FirstOrDefault(u => u.Type == "whatsapp") != null)
+            {
+                <input class="form-control" name="whatsapp" value="@User.Claims.FirstOrDefault(u => u.Type == "whatsapp").Value" />
+            }
+            else
+            {
+                <input class="form-control" name="whatsapp" value="" />
+            }
+        </div>
+        <button type="submit" class="btn btn-primary w-25 mx-auto">Post Now</button>
+    </div>
+
+    <input type="hidden" asp-for="userId" value="@User.Claims.FirstOrDefault(u => u.Type == "id").Value" />
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"></partial>
+    <script>
+        // Collect selected amenities and store them as a comma-separated string
+        document.querySelector('form').addEventListener('submit', function (event) {
+            let selectedAmenities = [];
+            document.querySelectorAll('.amenity-checkbox:checked').forEach(function (checkbox) {
+                selectedAmenities.push(checkbox.value);
+            });
+
+            // Join selected amenities into a single string, separated by commas
+            document.getElementById('amenitiesInput').value = selectedAmenities.join(', ');
+        });
+    </script>
+}
